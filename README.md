@@ -27,8 +27,6 @@ git clone <repo_url>
 cd <repo_folder>
 ```
 
-````
-
 2. Install dependencies:
 
 ```bash
@@ -55,8 +53,6 @@ npm run dev
 WEBHOOK_SECRET=your_webhook_secret_here
 NEXT_PUBLIC_RPC_URL=<optional_if_needed>
 ```
-
-````
 
 ---
 
