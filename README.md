@@ -2,67 +2,67 @@
 
 ## Description
 
-A small Next.js app that allows users to connect wallets, create orders, and view order status. Uses a mock API for order creation and status polling.
+A small Next.js (App Router + TypeScript) app that allows users to connect wallets, create orders, and view order status. Uses a mock API to simulate order creation, status progression, and webhook events.
 
 ## Features
 
-- Connect/disconnect at least two wallet types
-- Order creation form (amount, currency, token, note)
-- Form disabled until wallet is connected
-- Validation: amount > 0, required fields
-- Shows receipt card and updates status via polling & webhook
+- 🔑 Connect/disconnect wallets (MetaMask + WalletConnect via RainbowKit & Wagmi)
+- 📝 Order creation form (amount, currency, token, note)
+- ✅ Validation: amount > 0, required currency/token fields
+- 🚫 Form disabled until a wallet is connected
+- 📄 Displays receipt card after order creation
+- 🔄 Updates order status via **polling** (every 3s) and simulated **webhook events**
 
 ## Assumptions
 
-- Orders are stored in memory; no database required
-- Mock API simulates status progression: `created` → `processing` → `settled`/`failed`
-- Webhook simulation triggers status updates via `CustomEvent` in browser
+- Orders are stored in memory (no persistent database used).
+- Mock API simulates order lifecycle:
+  `created → processing → settled / failed`.
+- Webhook simulation is handled via a browser `CustomEvent` (`elementpay-webhook`).
 
 ## Setup
 
-1. Clone repo:
+1. **Clone repo:**
 
-```bash
-git clone <repo_url>
-cd <repo_folder>
-```
+   ```bash
+   git clone <repo_url>
+   cd <repo_folder>
+   ```
 
-2. Install dependencies:
+2. **Install dependencies:**
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
-3. Copy `.env.example` to `.env` and add your values:
+3. **Configure environment variables:**
+   Copy `.env.example` into `.env.local`:
 
-```bash
-cp .env.example .env
-```
+   ```bash
+   cp .env.example .env.local
+   ```
 
-4. Run development server:
+   Then update with your values.
 
-```bash
-npm run dev
-```
+4. **Run development server:**
 
-5. Open [http://localhost:3000](http://localhost:3000)
+   ```bash
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000).
 
 ## .env.example
 
 ```env
 WEBHOOK_SECRET=your_webhook_secret_here
-NEXT_PUBLIC_RPC_URL=<optional_if_needed>
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
 ```
 
----
+- `WEBHOOK_SECRET`: placeholder for simulating webhook signing.
+- `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID`: required for WalletConnect to work (safe to expose).
 
-### 2️⃣ .env.example
+## Deployment
 
-Create a simple `.env.example` file:
-
-```env
-WEBHOOK_SECRET=your_webhook_secret_here
-```
-
-- No real secret required for your mock, just to show you know how to use it.
-- If you have any RPC URLs or wallet configs, include them as `NEXT_PUBLIC_` variables.
+The app can be deployed easily to [Vercel](https://vercel.com).
+If deployed, set the same environment variables in your Vercel project settings.

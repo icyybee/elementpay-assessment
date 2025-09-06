@@ -1,11 +1,8 @@
-import { createConfig } from "wagmi";
+import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import { mainnet, sepolia } from "wagmi/chains";
-import { http } from "viem";
 
-export const config = createConfig({
+export const config = getDefaultConfig({
+  appName: "Elementpay",
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
   chains: [mainnet, sepolia],
-  transports: {
-    [mainnet.id]: http(),
-    [sepolia.id]: http(),
-  },
 });
