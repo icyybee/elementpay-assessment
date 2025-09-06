@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ElementPay Frontend Assessment
 
-## Getting Started
+## Description
 
-First, run the development server:
+A small Next.js app that allows users to connect wallets, create orders, and view order status. Uses a mock API for order creation and status polling.
+
+## Features
+
+- Connect/disconnect at least two wallet types
+- Order creation form (amount, currency, token, note)
+- Form disabled until wallet is connected
+- Validation: amount > 0, required fields
+- Shows receipt card and updates status via polling & webhook
+
+## Assumptions
+
+- Orders are stored in memory; no database required
+- Mock API simulates status progression: `created` → `processing` → `settled`/`failed`
+- Webhook simulation triggers status updates via `CustomEvent` in browser
+
+## Setup
+
+1. Clone repo:
+
+```bash
+git clone <repo_url>
+cd <repo_folder>
+```
+
+````
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Copy `.env.example` to `.env` and add your values:
+
+```bash
+cp .env.example .env
+```
+
+4. Run development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## .env.example
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+WEBHOOK_SECRET=your_webhook_secret_here
+NEXT_PUBLIC_RPC_URL=<optional_if_needed>
+```
 
-## Learn More
+````
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2️⃣ .env.example
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create a simple `.env.example` file:
 
-## Deploy on Vercel
+```env
+WEBHOOK_SECRET=your_webhook_secret_here
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- No real secret required for your mock, just to show you know how to use it.
+- If you have any RPC URLs or wallet configs, include them as `NEXT_PUBLIC_` variables.

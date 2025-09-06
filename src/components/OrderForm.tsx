@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { Order } from "@/types/order";
 import { useOrderStatus } from "@/hooks/useOrderStatus";
 import OrderReceipt from "./OrderReceipt";
+import FormInput from "./FormInput";
 
 interface FormValues {
   amount: number;
@@ -58,41 +59,32 @@ export default function OrderForm({
     <div>
       {!order && (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <input
-            {...register("amount", { min: 1 })}
+          <FormInput
             placeholder="Amount"
-            disabled={submitting}
             type="number"
-            className="w-full focus:outline-green-700 focus:outline-1 focus:border-0 transition-all border border-gray-300 rounded-md p-2"
+            register={register("amount", { min: 1 })}
+            error={errors.amount}
+            disabled={submitting}
           />
-          {errors.amount && (
-            <span className="text-red-500 text-sm">Amount must be &gt; 0</span>
-          )}
-
-          <input
-            {...register("currency", { required: true })}
+          <FormInput
+            type="text"
             placeholder="Currency (e.g., USD)"
+            register={register("currency", { required: true })}
+            error={errors.currency}
             disabled={submitting}
-            className="w-full focus:outline-green-700 focus:outline-1 focus:border-0 transition-all border border-gray-300 rounded-md p-2"
           />
-          {errors.currency && (
-            <span className="text-red-500 text-sm">Currency required</span>
-          )}
-
-          <input
-            {...register("token", { required: true })}
+          <FormInput
+            type="text"
             placeholder="Token (e.g., USDC)"
+            register={register("token", { required: true })}
+            error={errors.token}
             disabled={submitting}
-            className="w-full focus:outline-green-700 focus:outline-1 focus:border-0 transition-all border border-gray-300 rounded-md p-2"
           />
-          {errors.token && (
-            <span className="text-red-500 text-sm">Token required</span>
-          )}
-          <input
-            {...register("note")}
+          <FormInput
+            type="text"
             placeholder="Note (optional)"
+            register={register("note")}
             disabled={submitting}
-            className="w-full focus:outline-green-700 focus:outline-1 focus:border-0 transition-all border border-gray-300 rounded-md p-2"
           />
 
           <button

@@ -11,7 +11,7 @@ export default function OrderReceipt({ order }: { order: Order }) {
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md mx-auto flex flex-col gap-4">
-      <h2 className="text-2xl text-center mb-4 bg-green-600 text-white font-semibold">
+      <h2 className="sm:text-2xl text-xl text-center mb-4 bg-green-600 rounded-sm text-white sm:font-semibold font-bold">
         Order Receipt
       </h2>
 
@@ -39,10 +39,10 @@ export default function OrderReceipt({ order }: { order: Order }) {
         </div>
       )}
 
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex justify-between items-center mt-3">
         <span className="font-semibold">Status:</span>
         <span
-          className={`font-semibold px-3 py-1 rounded-full text-sm ${
+          className={`font-bold px-3 py-1 rounded-full text-sm ${
             statusColor[order.status]
           }`}
         >
